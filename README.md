@@ -1,5 +1,7 @@
 # Liquid LFM2.5 Playground
 
+https://github.com/TheAwaken1/LiquidAI-LFM2.5-Playground
+
 A Pinokio app for easily running LFM2.5-Audio-1.5B – Real-time voice chat, text-to-speech, and long-form speech-to-text (ASR) & LFM2.5-VL-1.6B – Multi-image vision-language reasoning (describe, OCR, compare, reason step-by-step). locally with a Gradio web UI.
 
 ### Features
