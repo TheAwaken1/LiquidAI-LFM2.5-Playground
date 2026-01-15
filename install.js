@@ -4,7 +4,7 @@ module.exports = {
     {
       "method": "shell.run",
       "params": {
-        "message": "echo app"
+        "message": "app/app.py"
       }
     },
     //  Install PyTorch and related packages (includes venv creation)
@@ -95,3 +95,4 @@ module.exports = {
     }
   ]
 };
+
