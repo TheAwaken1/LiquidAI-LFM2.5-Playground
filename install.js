@@ -1,30 +1,23 @@
 module.exports = {
   "run": [
-    //  No need to clone directory
-    {
-      "method": "shell.run",
-      "params": {
-        "message": "app/app.py"
-      }
-    },
-    //  Install PyTorch and related packages (includes venv creation)
+    // Install PyTorch and related packages (includes venv creation)
     {
       "method": "script.start",
       "params": {
         "uri": "torch.js",
         "params": {
           "venv_python": "3.12",
-          "venv": "env",                // Edit this to customize the venv folder path
-          "path": "app",                // Edit this to customize the path to start the shell from
+          "venv": "env",
+          "path": "app",
         }
       }
     },
-    //  Install core Python dependencies
+    // Core Python dependencies
     {
       "method": "shell.run",
       "params": {
-        "venv": "env",                // Edit this to customize the venv folder path
-        "path": "app",                // Edit this to customize the path to start the shell from
+        "venv": "env",
+        "path": "app",
         "message": [
           "uv pip install liquid-audio",
           "uv pip install liquid-audio[demo]",
@@ -32,12 +25,12 @@ module.exports = {
         ]
       }
     },
-    // Install additional Python dependencies
+    // Additional Python dependencies
     {
       "method": "shell.run",
       "params": {
-        "venv": "env",                // Edit this to customize the venv folder path
-        "path": "app",                // Edit this to customize the path to start the shell from
+        "venv": "env",
+        "path": "app",
         "message": [
           "uv pip install gradio devicetorch",
           "uv pip install librosa",
@@ -48,20 +41,19 @@ module.exports = {
     {
       "method": "shell.run",
       "params": {
-        "venv": "env",                // Edit this to customize the venv folder path
-        "path": "app",                // Edit this to customize the path to start the shell from
+        "venv": "env",
+        "path": "app",
         "message": [
           "uv pip install git+https://github.com/huggingface/transformers.git@3c2517727ce28a30f5044e01663ee204deb1cdbe pillow"
         ]
       }
     },
-    // Step 6: Install system dependencies (ffmpeg, libsndfile, cmake, gfortran)
+    // System dependencies (platform-specific)
     {
       "when": "{{platform === 'darwin'}}",
       "method": "shell.run",
       "params": {
         "message": [
-          // Install ffmpeg, libsndfile, cmake, and gcc (includes gfortran) via Homebrew, with Conda fallback for ffmpeg
           "brew install ffmpeg libsndfile cmake gcc || conda install ffmpeg -c conda-forge --yes || echo 'System dependencies (ffmpeg, libsndfile, cmake, gcc) installation failed. Please install manually with: brew install ffmpeg libsndfile cmake gcc'"
         ]
       }
@@ -71,7 +63,6 @@ module.exports = {
       "method": "shell.run",
       "params": {
         "message": [
-          // Try apt-get for Debian/Ubuntu, yum for CentOS, with Conda fallback for ffmpeg
           "sudo apt-get update && sudo apt-get install -y ffmpeg libsndfile1-dev cmake gfortran || sudo yum install -y ffmpeg libsndfile-devel cmake gcc-gfortran || conda install ffmpeg -c conda-forge --yes || echo 'System dependencies (ffmpeg, libsndfile, cmake, gfortran) installation failed. Please install manually with: sudo apt-get install ffmpeg libsndfile1-dev cmake gfortran or sudo yum install ffmpeg libsndfile-devel cmake gcc-gfortran'"
         ]
       }
@@ -81,12 +72,11 @@ module.exports = {
       "method": "shell.run",
       "params": {
         "message": [
-          // Windows only needs ffmpeg, as libsndfile, cmake, and gfortran are handled by Conda or not required
           "conda install ffmpeg -c conda-forge --yes || echo 'FFmpeg installation failed. Please install manually with: conda install ffmpeg'"
         ]
       }
     },
-    // Step 7: Notify user
+    // Notify user
     {
       "method": "notify",
       "params": {
