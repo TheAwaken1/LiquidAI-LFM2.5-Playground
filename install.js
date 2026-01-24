@@ -34,7 +34,8 @@ module.exports = {
         "message": [
           "uv pip install gradio devicetorch",
           "uv pip install librosa",
-          "uv pip install soundfile"
+          "uv pip install soundfile",
+          "uv pip install accelerate"
         ]
       }
     },
@@ -85,4 +86,7 @@ module.exports = {
     }
   ]
 };
+
+
+
 
